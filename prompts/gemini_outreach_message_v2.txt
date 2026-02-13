@@ -1,0 +1,67 @@
+You are preparing a Polish outreach email to an orthodontic/dental clinic.
+
+You MUST base the email on the provided Polish template text. The template text is authoritative.
+
+Inputs:
+- clinic_name: {CLINIC_NAME}
+- clinic_website: {CLINIC_WEBSITE}
+- pricing_status: {PRICING_STATUS}  # none|html_text|pdf_only|partial
+- found_urls: {FOUND_URLS_JSON}     # JSON array
+- found_emails: {FOUND_EMAILS_JSON} # JSON array
+- missing_prices: {MISSING_PRICES_JSON} # JSON array
+- template_file_text: {EMAIL_TEMPLATE_TEXT}
+
+Hard constraints:
+1) The email template is in Polish. Keep the tone professional.
+2) NEVER mention AI, automation, bots, or that this message was generated.
+3) Preserve the exact text of the following phrases IF they are present in the template. Do not alter punctuation, casing, or diacritics.
+
+MUST-PRESERVE-1:
+"rozważam leczenie aparatem stałym (metalowym lub ICONIX). Opis na stronie jest bardzo zachęcający i mam poczucie, że podchodzą Państwo do leczenia profesjonalnie, dlatego chciałbym poprosić o orientacyjną wycenę i komplet informacji o kosztach, żebym mógł spokojnie zaplanować budżet."
+
+MUST-PRESERVE-2:
+"Na koniec, czy są jeszcze jakieś typowe koszty dodatkowe, które warto uwzględnić w budżecie (np. awarie/naprawy elementów, dodatkowe badania)?"
+
+Rules:
+A) If pricing_status == "none":
+- Use the template almost verbatim.
+- You may adjust the bullet list ONLY to remove items that are already known.
+- Keep unknown questions intact.
+
+B) If pricing_status == "partial":
+- Ask ONLY for missing items.
+- Do NOT ask for things already found.
+- Keep the structure close to the template.
+
+C) If pricing_status == "pdf_only":
+- Treat this like partial/uncertain pricing.
+- Ask for missing items and clarification.
+
+D) If pricing_status == "html_text":
+- Assume some pricing exists.
+- Ask only for missing items (if any).
+- If missing_prices is empty, keep the email short and focused on confirmation.
+
+Additional guidance:
+- Prefer small, precise edits to the template instead of rewriting it.
+- If missing_prices is non-empty, convert missing items into short, concrete questions.
+- You may reference found_urls briefly if it helps clarify what was already checked.
+
+Output requirements:
+- Output MUST be strictly valid JSON (no markdown fences, no commentary).
+- The JSON schema is:
+{
+  "clinic_name": "...",
+  "subject": "...",
+  "body": "...",
+  "questions_missing_prices": ["..."],
+  "template_preservation_check": {
+    "preserved_phrase_1": true,
+    "preserved_phrase_2": true
+  }
+}
+
+Before producing the final JSON, internally verify:
+- Whether each MUST-PRESERVE phrase appears in the template.
+- If it appears, it must appear EXACTLY in the body.
+- Set preserved_phrase_1 / preserved_phrase_2 accordingly.

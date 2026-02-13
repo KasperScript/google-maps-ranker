@@ -1,0 +1,31 @@
+{
+  "places": [
+    {
+      "id": "p1",
+      "displayName": {"text": "Orto A"},
+      "rating": 4.7,
+      "userRatingCount": 2000,
+      "location": {"latitude": 52.23, "longitude": 21.01},
+      "types": ["dentist", "dental_clinic"],
+      "businessStatus": "OPERATIONAL"
+    },
+    {
+      "id": "p2",
+      "displayName": {"text": "Orto B"},
+      "rating": 5.0,
+      "userRatingCount": 50,
+      "location": {"latitude": 52.22, "longitude": 21.02},
+      "types": ["dentist"],
+      "businessStatus": "OPERATIONAL"
+    },
+    {
+      "id": "p3",
+      "displayName": {"text": "Cafe X"},
+      "rating": 4.8,
+      "userRatingCount": 300,
+      "location": {"latitude": 52.21, "longitude": 21.00},
+      "types": ["cafe"],
+      "businessStatus": "OPERATIONAL"
+    }
+  ]
+}
