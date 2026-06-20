@@ -10,7 +10,10 @@
 - Use a branch for non-trivial work.
 - Keep changes focused.
 - Run available checks (tests, linters, build) before finishing.
-- End with a pushed branch or PR.
+- For non-trivial work: branch -> open a PR -> run `gh pr merge --auto --squash`
+  to enable auto-merge YOURSELF. GitHub merges it automatically once CI passes.
+  Do NOT manually merge `main` (it bypasses CI), do NOT push feature work straight
+  to `main`, and do NOT ask the user to click merge -- auto-merge handles it.
 - Never commit secrets.
 - Known environment variable names are listed in `docs/global.env.template`.
 - If you need real secret values, ask me which variables to configure in the
